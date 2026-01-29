@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contabilidad y Excel</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    header {
+      background: #0f766e;
+      color: white;
+      padding: 40px 30px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    header img {
+      width: 240px;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 45px;
+      line-height: 1.2;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: 18px;
+    }
+
+    section {
+      padding: 25px 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #0f766e;
+    }
+
+    .servicios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    /* 🔘 BOTÓN DEMO */
+    .btn-demo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      background: #0f766e;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .btn-demo img {
+      width: 18px;
+      height: 18px;
+      filter: invert(1);
+    }
+
+    .cta {
+      background: #0f766e;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .cta a {
+      background: white;
+      color: #0f766e;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cta img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* 🎨 COLORES DE LOGOS */
+    .cta a[href*="wa.me"] img {
+      filter: invert(45%) sepia(90%) saturate(450%) hue-rotate(90deg);
+    }
+
+    .cta a[href*="mailto"] img {
+      filter: invert(23%) sepia(85%) saturate(3000%) hue-rotate(350deg);
+    }
+
+    .cta a[href*="tiktok"] img {
+      filter: invert(0%);
+    }
+
+    .cta a[href*="facebook"] img {
+      filter: invert(35%) sepia(80%) saturate(600%) hue-rotate(185deg);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        text-align: center;
+        justify-content: center;
+      }
+
+      header h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<!-- ================= CHATBOT COMPLETO ================= -->
+
+<style>
+/* BOTÓN FLOTANTE */
+.chatbot-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0f766e;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+
+/* CONTENEDOR CHAT */
+.chatbot {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  max-height: 420px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* CABECERA */
+.chatbot header {
+  background: #0f766e;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* CUERPO */
+.chatbot-body {
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 14px;
+}
+
+/* BOTONES */
+.chatbot-body button {
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
+  border: none;
+  background: #e5f3f2;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+}
+
+.chatbot-body button:hover {
+  background: #cceae7;
+}
+
+/* RESPUESTA */
+.chatbot-response {
+  margin-top: 10px;
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.chatbot-response a {
+  display: inline-block;
+  margin-top: 8px;
+  background: #0f766e;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+</style>
+
+<!-- ================= CHATBOT SIMPLE ================= -->
+<style>
+  #chatbot-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #0f766e;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+   #chatbot-box {
+    position: fixed;
+    bottom: 100px;
+    right: 25px;
+    width: 330px;
+    max-height: 75vh;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
+
+  #chatbot-header {
+    background: #0f766e;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  #chatbot-messages {
+    padding: 10px;
+    flex: 1;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+
+  .bot {
+    background: #f1f1f1;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .user {
+    background: #d1fae5;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    text-align: right;
+  }
+
+  #chatbot-options button {
+    width: 100%;
+    border: none;
+    background: #0f766e;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  #chatbot-options button:hover {
+    background: #115e59;
+  }
+
+  .whatsapp-btn {
+    display: inline-block;
+    margin-top: 8px;
+    background: #25D366;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
+
+<button id="chatbot-btn">💬</button>
+
+<div id="chatbot-box">
+  <div id="chatbot-header">Asistente Contabilidad & Excel</div>
+
+  <div id="chatbot-messages">
+    <div class="bot">
+      ¡Hola! 👋<br>
+      ¿En qué puedo ayudarte?
+    </div>
+  </div>
+
+  <div id="chatbot-options">
+    <button onclick="respuesta('demo')">📄 Solicitar demo</button>
+    <button onclick="respuesta('precio')">💲 Precios</button>
+    <button onclick="respuesta('personalizadas')">⚙️ Herramientas personalizadas</button>
+    <button onclick="respuesta('garantia')">✅ Garantía</button>
+    <button onclick="respuesta('isr')">📑 Costo herramienta Generador Constancias ISR</button>
+    <button onclick="respuesta('whatsapp')">📲 Hablar por WhatsApp</button>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById("chatbot-btn");
+  const box = document.getElementById("chatbot-box");
+  const messages = document.getElementById("chatbot-messages");
+
+  btn.onclick = () => {
+    box.style.display = box.style.display === "flex" ? "none" : "flex";
+  };
+
+  function addMessage(text, type) {
+    const div = document.createElement("div");
+    div.className = type;
+    div.innerHTML = text;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function respuesta(tipo) {
+
+    if (tipo === "demo") {
+      addMessage("Solicitar demo", "user");
+      addMessage(
+        `Claro 😊<br>
+         Puedes solicitar una demo personalizada escribiéndonos directamente por WhatsApp.<br>
+         <a class="whatsapp-btn" href="https://wa.me/50372575007" target="_blank">
+           📲 WhatsApp
+         </a>`,
+        "bot"
+      );
+    }
+
+    if (tipo === "precio") {
+      addMessage("Precios", "user");
+      addMessage(
+        "Los precios dependen de la herramienta y el nivel de personalización.<br>Escríbenos y te cotizamos sin compromiso.",
+        "bot"
+      );
+    }
+
+    if (tipo === "personalizadas") {
+      addMessage("¿Pueden crear herramientas personalizadas?", "user");
+      addMessage(
+        `Con gusto ✅<br>
+         Escríbenos al WhatsApp, coméntanos tu idea y la adaptamos en Excel.<br>
+         <a class="whatsapp-btn" href="https://wa.me/50372575007" target="_blank">
+           📲 WhatsApp
+         </a>`,
+        "bot"
+      );
+    }
+
+    if (tipo === "garantia") {
+      addMessage("¿Las herramientas tienen garantía?", "user");
+      addMessage(
+        `Por supuesto ✅<br>
+         Las herramientas tienen garantía por errores de estructura o programación.<br>
+         Si necesita actualizaciones personalizadas que modifiquen la estructura o funcionamiento,
+         estas tendrán un costo adicional.`,
+        "bot"
+      );
+    }
+
+    if (tipo === "isr") {
+      addMessage("¿Costo de la herramienta generadora de constancias ISR?", "user");
+      addMessage(
+        `Con gusto te explico 😊<br><br>
+        <strong>Opciones de licencia:</strong><br><br>
+        💼 <strong>Licencia anual</strong> – $10.00<br>
+        Incluye video explicativo.<br><br>
+
+        💼 <strong>Licencia por 4 años</strong> – $25.00<br>
+        Incluye video explicativo y atención al cliente.<br><br>
+
+        💼 <strong>Licencia definitiva (sin vencimiento)</strong> – $45.00<br>
+        Incluye:<br>
+        ✔ Video explicativo<br>
+        ✔ Atención al cliente<br>
+        ✔ Prioridad en actualizaciones del Ministerio de Hacienda<br>
+        ✔ Comisión por referidos que adquieran la licencia definitiva<br><br>
+
+       Si deseas más detalles o adquirir la herramienta, escríbenos por WhatsApp 👇
+       <a class="whatsapp-btn" href="https://wa.me/50372575007" target="_blank">
+       📲 WhatsApp
+     </a>`,
+    "bot"
+      );
+    }
+    
+
+    if (tipo === "whatsapp") {
+      addMessage("Quiero hablar por WhatsApp", "user");
+      addMessage(
+        `<a class="whatsapp-btn" href="https://wa.me/50372575007" target="_blank">
+           📲 Abrir WhatsApp
+         </a>`,
+        "bot"
+      );
+    }
+  }
+</script>
+<!-- ================= FIN CHATBOT ================= -->
+
+<body>
+
+<header>
+  <img src="logo.png" alt="Contabilidad y Excel">
+  <div>
+    <h1>Contabilidad y Excel</h1>
+    <p><strong>Nos adaptamos a tus necesidades</strong></p>
+  </div>
+</header>
+
+<section>
+  <h2>¿Quién soy?</h2>
+  <p>
+    Soy contador autorizado y desarrollador de macros en Excel, enfocado en automatizar procesos contables y administrativos
+    para contadores y pequeñas empresas. Mi objetivo es ayudarte a ahorrar tiempo, reducir errores y trabajar
+    de forma más eficiente..
+  </p>
+</section>
+
+<section>
+  <h2>HERRAMIENTAS DE EXCEL</h2>
+  <div class="servicios">
+
+    <!-- ⭐ TARJETA CON BOTÓN DEMO -->
+    <div class="card">
+      <h3>📄✔️ Generador de Constancias de Renta</h3>
+      <p>Generación masiva, rápida y ordenada de constancias de renta.</p>
+
+      <a class="btn-demo"
+         href="https://wa.me/50372575007?text=Hola%20quiero%20solicitar%20una%20demo%20del%20Generador%20de%20Constancias%20de%20Renta"
+         target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg">
+        Solicitar demo
+      </a>
+    </div>
+
+    <div class="card">
+      <h3>🔍 Lector de JSON de Compras (en desarrollo)</h3>
+      <p>Lectura automática de documentos JSON para control tributario.</p>
+    </div>
+
+    <div class="card">
+      <h3>🧾 Planilla y Boletas de Pago (en desarrollo)</h3>
+      <p>Automatización completa de planillas adaptadas a tu empresa.</p>
+    </div>
+
+    <div class="card">
+      <h3>⚙️✔️ Macros a la Medida</h3>
+      <p>Soluciones personalizadas según tus procesos.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>¿A quién va dirigido?</h2>
+  <ul>
+    <li>Contadores independientes</li>
+    <li>Despachos contables</li>
+    <li>Pequeñas y medianas empresas</li>
+  </ul>
+</section>
+
+<div class="cta">
+  <h2>Contacto</h2>
+  <p>Solicita tus demos, consultas y cotizaciones sin compromiso</p>
+  <p>NOS ADAPTAMOS A TUS NECESIDADES</p>
+
+  <a href="https://wa.me/50372575007" target="_blank">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg">
+    WhatsApp
+  </a>
+
+  <a href="mailto:omar31cp@gmail.com">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg">
+    Correo
+  </a>
+
+  <a href="https://www.tiktok.com/@contabilidad.y.ex?_r=1&_t=ZS-93SYCWAX0MS" target="_blank">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg">
+    TikTok
+  </a>
+
+  <a href="https://www.facebook.com/share/1DrsGYymxh/" target="_blank">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg">
+    Facebook
+  </a>
+</div>
+
+<footer>
+  <p>© 2026 - Contabilidad y Excel | El Salvador</p>
+</footer>
+
+</body>
+</html>
